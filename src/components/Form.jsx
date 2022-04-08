@@ -10,10 +10,17 @@ const Form = () => {
   const [value, setValue] = useState(0);
 
   const onValidate = () => {
-    if (name === "" && email === "" && password === "" && date === "") {
-      return true;
+    if (name === "" || email === "" || password === "" || date === "") {
+      cogoToast.error("Please fill this form");
+    } else if (type === "low" || type === "more") {
+      cogoToast.error("This password is too weak");
+    } else {
+      cogoToast.success("Sended successful");
+      setDate("");
+      setEmail("");
+      setName("");
+      setPassword("");
     }
-    return false;
   };
 
   const checkStrengthPassword = () => {
@@ -65,74 +72,60 @@ const Form = () => {
     }
   };
 
-  const errorPassword = {
-    lack: "lack of password",
-    more: "More of characters",
-    strong: "Strong",
-    medium: "Medium",
-    type: type,
-    low: "Low",
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
     onValidate();
-    if (type === "medium" || type === "strong") {
-      cogoToast.success("Sended successful");
-    } else {
-      cogoToast.error("This password is too weak");
-    }
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          aria-label="Name"
-          type="text"
-          required
-          onChange={onChange}
-          minLength="3"
-          name="name"
-          value={name}
-          placeholder="Enter your Name"
-        />
-        <input
-          aria-label="Email"
-          type="email"
-          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-          onChange={onChange}
-          name="email"
-          value={email}
-          placeholder="Enter your email"
-        />
-        <input
-          aria-label="Password"
-          onChange={onChange}
-          name="password"
-          required
-          value={password}
-          placeholder="Enter your password"
-          type="password"
-        />
-        <span>{type}</span>
-        <progress
-          className={value < 0 ? "progress" : "initial"}
-          value={value}
-          max="50"
-        ></progress>
-        <input
-          aria-label="Date of birth"
-          onChange={onChange}
-          name="date"
-          required
-          value={date}
-          placeholder="Enter your date of birth"
-          type="date"
-        />
-        <button>Wyślij</button>
-      </form>
-    </div>
+    <form onSubmit={onSubmit}>
+      <label for="fname">Name</label>
+      <input
+        type="text"
+        id="fname"
+        onChange={onChange}
+        name="name"
+        value={name}
+        required
+        placeholder="Your name.."
+      />
+      <label for="lemail">Email</label>
+      <input
+        type="email"
+        id="lemail"
+        onChange={onChange}
+        required
+        name="email"
+        value={email}
+        placeholder="Your email.."
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        onChange={onChange}
+        name="password"
+        required
+        value={password}
+        placeholder="Your password.."
+      />
+      <progress max="25" value={value}></progress>
+      <br></br>
+      <span>{type}</span>
+      <br></br>
+      <br></br>
+      <label for="date">Date of birth</label>
+      <input
+        type="date"
+        id="date"
+        required
+        onChange={onChange}
+        name="date"
+        value={date}
+        placeholder="Your date of birth.."
+      />
+      <input type="submit" value="Submit" />
+    </form>
   );
 };
 export default Form;

@@ -5,8 +5,8 @@
 
 input[type="text"],
 [type="email"],
-[type="password"],
-[type="date"] {
+[type="date"],
+[type="password"] {
   border: 1px solid #bdbdbd;
   border-radius: 5px;
   width: 100%;
@@ -14,10 +14,20 @@ input[type="text"],
   margin: 10px 0;
 }
 
+progress {
+  height: 18px;
+}
+
+span {
+  font-size: 15px;
+  color: white;
+}
+
 form {
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 20px;
   flex: 1 1 100%;
   margin: 30px auto;
 }
@@ -29,77 +39,42 @@ h2 {
 
 .container {
   position: relative;
-  min-width: 300px;
-  max-width: 360px;
-  max-height: 480px;
+  max-width: 405px;
+  min-height: 800px;
+  max-height: 550px;
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
-  background: #0e8ef0;
+  background-color: #27bcc4;
   margin: 0 auto;
   box-shadow: 1px 3px 0px #cbced1, 2px -4px 7px white;
 }
 
-button {
-  background-color: #060690;
-  margin: 100px 0;
+input[type="submit"] {
+  background-color: #3dbcee;
+  margin: 20px 0;
   width: 7.2rem;
   border-radius: 5px;
   height: 33px;
   color: white;
 }
 
-.progress {
-  border-radius: 12px;
-  width: 200px;
-}
-
-span {
-  font-size: 14px;
+label {
+  font-size: 15px;
   color: white;
 }
 
-.initial {
-  background-color: white;
-  width: 200px;
-  border-radius: 12px;
+input[type="submit"]:hover {
+  background-color: rgb(0, 89, 255);
 }
 
-button:hover {
-  background-color: rgb(32, 141, 230);
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   .container {
-    width: 72vw;
-    height: 85vh;
+    max-width: 400px;
+    min-height: 742px;
   }
   form {
     padding: 0;
     width: 100%;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
