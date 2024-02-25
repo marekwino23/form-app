@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h2>Formularz rekrutacyjny</h2>
+        <h2>Zostaw swoje dane</h2>
         <Form></Form>
       </div>
     </div>

@@ -72,14 +72,14 @@ const Form = () => {
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     onValidate();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <label for="fname">Name</label>
+      <label for="fname">Imie i nazwisko</label>
       <input
         type="text"
         id="fname"
@@ -87,9 +87,9 @@ const Form = () => {
         name="name"
         value={name}
         required
-        placeholder="Your name.."
+        placeholder="Podaj swoje imię i nazwisko.."
       />
-      <label for="lemail">Email</label>
+      <label for="lemail">E-mail</label>
       <input
         type="email"
         id="lemail"
@@ -97,9 +97,9 @@ const Form = () => {
         required
         name="email"
         value={email}
-        placeholder="Your email.."
+        placeholder="Podaj swojego maila.."
       />
-      <label for="password">Password</label>
+      {/* <label for="password">Password</label>
       <input
         type="password"
         id="password"
@@ -108,13 +108,13 @@ const Form = () => {
         required
         value={password}
         placeholder="Your password.."
-      />
-      <progress max="25" value={value}></progress>
+      /> */}
+      {/* <progress max="25" value={value}></progress>
       <br></br>
       <span>{type}</span>
       <br></br>
-      <br></br>
-      <label for="date">Date of birth</label>
+      <br></br> */}
+      {/* <label for="date">Date of birth</label>
       <input
         type="date"
         id="date"
@@ -123,8 +123,8 @@ const Form = () => {
         name="date"
         value={date}
         placeholder="Your date of birth.."
-      />
-      <input type="submit" value="Submit" />
+      /> */}
+      <input style={{ cursor: "pointer" }} type="submit" value="Wyślij" />
     </form>
   );
 };
