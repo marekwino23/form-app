@@ -23,42 +23,42 @@ const Form = () => {
     }
   };
 
-  const checkStrengthPassword = () => {
-    let strongPassword = new RegExp(
-      "^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
-      "g"
-    );
-    let mediumPassword = new RegExp(
-      "^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
-      "g"
-    );
-    let enoughPassword = new RegExp("(?=.{8,}).*", "g");
-    if (password.length === 0) {
-      setValue(password.length);
-      setType("lack of password");
-      return false;
-    } else if (false === enoughPassword.test(password)) {
-      setValue(password.length);
-      setType("more");
-      return false;
-    } else if (strongPassword.test(password)) {
-      setType("strong");
-      setValue(password.length);
-      return true;
-    } else if (mediumPassword.test(password)) {
-      setType("medium");
-      setValue(password.length);
-      return true;
-    } else {
-      setValue(password.length);
-      setType("low");
-      return false;
-    }
-  };
+  // const checkStrengthPassword = () => {
+  //   let strongPassword = new RegExp(
+  //     "^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$",
+  //     "g"
+  //   );
+  //   let mediumPassword = new RegExp(
+  //     "^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$",
+  //     "g"
+  //   );
+  //   let enoughPassword = new RegExp("(?=.{8,}).*", "g");
+  //   if (password.length === 0) {
+  //     setValue(password.length);
+  //     setType("lack of password");
+  //     return false;
+  //   } else if (false === enoughPassword.test(password)) {
+  //     setValue(password.length);
+  //     setType("more");
+  //     return false;
+  //   } else if (strongPassword.test(password)) {
+  //     setType("strong");
+  //     setValue(password.length);
+  //     return true;
+  //   } else if (mediumPassword.test(password)) {
+  //     setType("medium");
+  //     setValue(password.length);
+  //     return true;
+  //   } else {
+  //     setValue(password.length);
+  //     setType("low");
+  //     return false;
+  //   }
+  // };
 
-  useEffect(() => {
-    checkStrengthPassword();
-  });
+  // useEffect(() => {
+  //   checkStrengthPassword();
+  // });
 
   const onChange = (e) => {
     if (e.target.name === "name") {
@@ -73,8 +73,25 @@ const Form = () => {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-    onValidate();
+    try {
+      e.preventDefault();
+      // onValidate();
+      const response = await fetch("http://localhost:4000/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: name, email: email }),
+      });
+
+      const result = await response.json();
+      console.log("Success:", result);
+      cogoToast.success("Sended successful");
+      setEmail("");
+      setName("");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -125,6 +142,14 @@ const Form = () => {
         placeholder="Your date of birth.."
       /> */}
       <input style={{ cursor: "pointer" }} type="submit" value="Wyślij" />
+      <div
+        style={{
+          height: "auto",
+          margin: "0 auto",
+          maxWidth: 64,
+          width: "100%",
+        }}
+      ></div>
     </form>
   );
 };
